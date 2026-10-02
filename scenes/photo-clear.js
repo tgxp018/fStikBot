@@ -37,7 +37,6 @@ photoClear.enter(async (ctx) => {
     reply_markup: {
       inline_keyboard: [
         ...modelButtons(ctx, 'clear_model', { markCurrent: true }),
-        [{ text: ctx.i18n.t('scenes.photoClear.web_app'), web_app: { url: 'https://bot.lyo.su/remove-background-web/' } }]
       ]
     }
   })
@@ -50,7 +49,6 @@ photoClear.action(/^clear_model:(\w+)$/, async (ctx) => {
   await ctx.editMessageReplyMarkup({
     inline_keyboard: [
       ...modelButtons(ctx, 'clear_model', { markCurrent: true }),
-      [{ text: ctx.i18n.t('scenes.photoClear.web_app'), web_app: { url: 'https://bot.lyo.su/remove-background-web/' } }]
     ]
   }).catch(() => {})
 })

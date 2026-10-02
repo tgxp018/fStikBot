@@ -17,9 +17,9 @@ Choose an option:
   `
 
   const replyMarkup = Markup.inlineKeyboard([
-    [Markup.callbackButton('🖊 Edit/Remove Pack', 'admin:pack:edit')],
-    [Markup.callbackButton('🗑 Bulk Delete Packs', 'admin:pack:bulk_delete')],
-    [Markup.callbackButton('🔙 Back to Admin Menu', 'admin:back')]
+    [Markup.callbackButton('🖊 编辑/删除贴纸包', 'admin:pack:edit')],
+    [Markup.callbackButton('🗑 批量删除贴纸包', 'admin:pack:bulk_delete')],
+    [Markup.callbackButton('🔙 返回管理菜单', 'admin:back')]
   ])
 
   await ctx.editMessageText(resultText, {

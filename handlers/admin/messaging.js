@@ -15,12 +15,12 @@ const { STATUS } = broadcast
 const composer = new Composer()
 
 const STATUS_BADGES = {
-  [STATUS.QUEUED]: '⏳ Queued',
-  [STATUS.SENDING]: '🚀 Sending',
-  [STATUS.PAUSED]: '⏸ Paused',
-  [STATUS.COMPLETED]: '✅ Completed',
-  [STATUS.CANCELLED]: '❌ Cancelled',
-  [STATUS.FAILED]: '💥 Failed'
+  [STATUS.QUEUED]: '⏳ 排队中',
+  [STATUS.SENDING]: '🚀 发送中',
+  [STATUS.PAUSED]: '⏸ 已暂停',
+  [STATUS.COMPLETED]: '✅ 已完成',
+  [STATUS.CANCELLED]: '❌ 已取消',
+  [STATUS.FAILED]: '💥 失败'
 }
 
 const renderProgressBar = (sent, total, width = 12) => {
@@ -36,7 +36,7 @@ const renderStatusText = (b) => {
   const completionPct = total ? Math.round((sent / total) * 100) : 0
 
   const lines = [
-    '<b>📊 Broadcast status</b>',
+    '<b>📊 广播状态</b>',
     '',
     `<b>Name:</b> ${escapeHTML(b.name)}`,
     `<b>Status:</b> ${STATUS_BADGES[b.status] || b.status}`,
@@ -52,7 +52,7 @@ const renderStatusText = (b) => {
   if (b.errorCounts && typeof b.errorCounts === 'object') {
     const entries = Object.entries(b.errorCounts)
     if (entries.length) {
-      lines.push('', '<b>Errors by category:</b>')
+      lines.push('', '<b>按类别统计错误：</b>')
       for (const [code, count] of entries) {
         lines.push(`  • ${code}: ${count}`)
       }
@@ -64,7 +64,7 @@ const renderStatusText = (b) => {
   }
 
   if (b.errorSamples && b.errorSamples.length) {
-    lines.push('', '<b>Recent error samples:</b>')
+    lines.push('', '<b>最近错误示例：</b>')
     for (const s of b.errorSamples.slice(-5)) {
       lines.push(`  • <code>${s.telegram_id}</code> [${s.code}]: ${escapeHTML(s.message || '')}`)
     }
@@ -76,24 +76,24 @@ const renderStatusText = (b) => {
 const statusKeyboard = (b) => {
   const rows = [
     [
-      Markup.callbackButton('🔄 Refresh', `admin:messaging:status:${b._id}`),
-      Markup.callbackButton('👁 View post', `admin:messaging:view:${b._id}`)
+      Markup.callbackButton('🔄 刷新', `admin:messaging:status:${b._id}`),
+      Markup.callbackButton('👁 查看帖子', `admin:messaging:view:${b._id}`)
     ]
   ]
   if (!broadcast.isTerminal(b.status)) {
-    rows.push([Markup.callbackButton('❌ Cancel broadcast', `admin:messaging:cancel:${b._id}`)])
+    rows.push([Markup.callbackButton('❌ 取消广播', `admin:messaging:cancel:${b._id}`)])
   }
   if (b.status === STATUS.PAUSED) {
-    rows.push([Markup.callbackButton('▶️ Resume', `admin:messaging:resume:${b._id}`)])
+    rows.push([Markup.callbackButton('▶️ 恢复', `admin:messaging:resume:${b._id}`)])
   }
   // A crash (usually a transient Mongo error between batches) keeps the
   // materialized recipients, so the campaign can simply be re-queued.
   if (b.status === STATUS.FAILED) {
-    rows.push([Markup.callbackButton('🔁 Retry', `admin:messaging:resume:${b._id}`)])
+    rows.push([Markup.callbackButton('🔁 重试', `admin:messaging:resume:${b._id}`)])
   }
   rows.push([
-    Markup.callbackButton('← Broadcasts', 'admin:messaging'),
-    Markup.callbackButton('⚙️ Admin', 'admin:back')
+    Markup.callbackButton('← 广播', 'admin:messaging'),
+    Markup.callbackButton('⚙️ 管理', 'admin:back')
   ])
   return Markup.inlineKeyboard(rows)
 }
@@ -103,13 +103,13 @@ const statusKeyboard = (b) => {
 // ───────────────────────────────────────────────────────────────────────
 composer.action(/^admin:messaging$/, async (ctx) => {
   await ctx.answerCbQuery().catch(() => {})
-  await tolerantEditMessage(ctx, '📣 <b>Broadcasts</b>\n\nPick an action:', {
+  await tolerantEditMessage(ctx, '📣 <b>广播</b>\n\n选择操作：', {
     parse_mode: 'HTML',
     reply_markup: Markup.inlineKeyboard([
-      [Markup.callbackButton('➕ New broadcast', 'admin:messaging:create')],
-      [Markup.callbackButton('📋 Active', 'admin:messaging:list:active:1')],
-      [Markup.callbackButton('📁 Archive', 'admin:messaging:list:archive:1')],
-      [Markup.callbackButton('« Admin', 'admin:back')]
+      [Markup.callbackButton('➕ 新建广播', 'admin:messaging:create')],
+      [Markup.callbackButton('📋 进行中', 'admin:messaging:list:active:1')],
+      [Markup.callbackButton('📁 归档', 'admin:messaging:list:archive:1')],
+      [Markup.callbackButton('« 管理', 'admin:back')]
     ])
   })
 })
@@ -156,11 +156,11 @@ composer.action(/^admin:messaging:list:(active|archive):(\d+)$/, async (ctx) => 
   if (nav.length) rows.push(nav)
 
   rows.push([
-    Markup.callbackButton('← Broadcasts', 'admin:messaging'),
-    Markup.callbackButton('⚙️ Admin', 'admin:back')
+    Markup.callbackButton('← 广播', 'admin:messaging'),
+    Markup.callbackButton('⚙️ 管理', 'admin:back')
   ])
 
-  const headline = kind === 'archive' ? '📁 <b>Archive</b>' : '📋 <b>Active broadcasts</b>'
+  const headline = kind === 'archive' ? '📁 <b>归档</b>' : '📋 <b>进行中的广播</b>'
   const body = total === 0
     ? `${headline}\n\n<i>Nothing here.</i>`
     : `${headline}\n\nPage ${safePage}/${pages} · ${total} total`
@@ -178,10 +178,10 @@ composer.action(/^admin:messaging:status:([a-f0-9]{24})$/, async (ctx) => {
   await ctx.answerCbQuery().catch(() => {})
   const b = await ctx.db.Broadcast.findById(ctx.match[1]).lean()
   if (!b) {
-    return tolerantEditMessage(ctx, '⚠️ Broadcast not found.', {
+    return tolerantEditMessage(ctx, '⚠️ 未找到广播。', {
       parse_mode: 'HTML',
       reply_markup: Markup.inlineKeyboard([[
-        Markup.callbackButton('← Broadcasts', 'admin:messaging')
+        Markup.callbackButton('← 广播', 'admin:messaging')
       ]])
     })
   }
@@ -199,10 +199,10 @@ composer.action(/^admin:messaging:status:([a-f0-9]{24})$/, async (ctx) => {
 composer.action(/^admin:messaging:view:([a-f0-9]{24})$/, async (ctx) => {
   await ctx.answerCbQuery().catch(() => {})
   const b = await ctx.db.Broadcast.findById(ctx.match[1]).lean()
-  if (!b) return ctx.replyWithHTML('⚠️ Broadcast not found.')
+  if (!b) return ctx.replyWithHTML('⚠️ 未找到广播。')
 
   await broadcast.renderPreview(ctx.telegram, ctx.chat.id, b.message).catch((err) => (
-    ctx.replyWithHTML(`❌ Preview failed: <code>${escapeHTML(err.message || err.description || 'unknown')}</code>`).catch(() => {})
+    ctx.replyWithHTML(`❌ 预览失败：<code>${escapeHTML(err.message || err.description || 'unknown')}</code>`).catch(() => {})
   ))
 })
 
@@ -222,7 +222,7 @@ composer.action(/^admin:messaging:cancel:([a-f0-9]{24})$/, async (ctx) => {
   )
 
   if (!updated) {
-    return ctx.replyWithHTML('⚠️ Cannot cancel — broadcast already finished.')
+    return ctx.replyWithHTML('⚠️ 无法取消——广播已结束。')
   }
 
   // Drop materialized recipients so we don't carry the queue around forever.
@@ -246,7 +246,7 @@ composer.action(/^admin:messaging:resume:([a-f0-9]{24})$/, async (ctx) => {
     { new: true }
   )
   if (!updated) {
-    return ctx.replyWithHTML('⚠️ Cannot resume — broadcast is neither paused nor failed.')
+    return ctx.replyWithHTML('⚠️ 无法恢复——广播既未暂停也未失败。')
   }
   await tolerantEditMessage(ctx, renderStatusText(updated), {
     parse_mode: 'HTML',

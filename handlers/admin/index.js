@@ -39,7 +39,7 @@ const AWAITING = {
 }
 
 const cancelInputKeyboard = Markup.inlineKeyboard([
-  [Markup.callbackButton('✖️ Cancel', 'admin:input:cancel')]
+  [Markup.callbackButton('✖️ 取消', 'admin:input:cancel')]
 ])
 
 const promptInput = async (ctx, key, text) => {
@@ -79,10 +79,10 @@ const fetchTransactions = async (tg, filterKey, maxTransactions = 10000) => {
 
 const sectionLabel = (right) => {
   switch (right) {
-    case 'messaging': return '📣 Broadcasts'
-    case 'pack': return '📦 Pack management'
-    case 'finance': return '💰 Financial ops'
-    case 'users': return '👥 User management'
+    case 'messaging': return '📣 广播'
+    case 'pack': return '📦 贴纸包管理'
+    case 'finance': return '💰 财务操作'
+    case 'users': return '👥 用户管理'
     default: return `⚙️ ${right}`
   }
 }
@@ -116,16 +116,16 @@ const displayAdminPanel = async (ctx) => {
   const showTransactions = isMainAdmin(ctx) || rights.includes('finance')
 
   const text = [
-    '🔐 <b>Admin Panel</b>',
+    '🔐 <b>管理面板</b>',
     '',
-    isMainAdmin(ctx) ? '👑 You are the main admin.' : `🛡 Your rights: <b>${rights.join(', ') || 'none'}</b>`
+    isMainAdmin(ctx) ? '👑 你是主管理员。' : `🛡 你的权限：<b>${rights.join(', ') || '无'}</b>`
   ].join('\n')
 
   const buttons = visibleRights.map(r => [Markup.callbackButton(sectionLabel(r), sectionCallback(r))])
   if (showTransactions) {
-    buttons.push([Markup.callbackButton('📊 Transaction history', 'admin:transactions')])
+    buttons.push([Markup.callbackButton('📊 交易记录', 'admin:transactions')])
   }
-  buttons.push([Markup.callbackButton('📈 Product metrics', 'admin:metrics')])
+  buttons.push([Markup.callbackButton('📈 产品指标', 'admin:metrics')])
 
   await renderMessage(ctx, text, Markup.inlineKeyboard(buttons))
 }
@@ -134,11 +134,11 @@ const displayAdminPanel = async (ctx) => {
 // Sticker and video rates count finished attempts only: duplicates are not
 // failures, and a queued video has no outcome until the worker reports it.
 const METRIC_FUNNELS = [
-  ['/new → pack created', ['new_pack_started'], ['pack_created']],
-  ['copy → pack created', ['copy_started'], ['copy_created']],
-  ['stickers added (non-video)', ['sticker_added', 'sticker_failed'], ['sticker_added']],
-  ['videos added', ['video_added', 'video_failed'], ['video_added']],
-  ['files → added, all', ['sticker_received'], ['sticker_added', 'video_added']]
+  ['/new → 贴纸包创建', ['new_pack_started'], ['pack_created']],
+  ['复制 → 贴纸包创建', ['copy_started'], ['copy_created']],
+  ['添加贴纸（非视频）', ['sticker_added', 'sticker_failed'], ['sticker_added']],
+  ['添加视频', ['video_added', 'video_failed'], ['video_added']],
+  ['文件 → 全部添加', ['sticker_received'], ['sticker_added', 'video_added']]
 ]
 
 const displayMetrics = async (ctx) => {
@@ -158,45 +158,45 @@ const displayMetrics = async (ctx) => {
   const rows = Object.keys(total).sort().map((name) => `<code>${name}</code> — ${total[name]} <i>(today ${today[name] || 0})</i>`)
 
   const text = [
-    '📈 <b>Product metrics</b> — last 7 days',
+    '📈 <b>产品指标</b> — 最近 7 天',
     '',
     ...(funnels.length ? [...funnels, ''] : []),
-    ...(rows.length ? rows : ['<i>No data yet.</i>'])
+    ...(rows.length ? rows : ['<i>暂无数据。</i>'])
   ].join('\n')
 
   await renderMessage(ctx, text, Markup.inlineKeyboard([
-    [Markup.callbackButton('🔄 Refresh', 'admin:metrics')],
-    [Markup.callbackButton('« Back', 'admin:back')]
+    [Markup.callbackButton('🔄 刷新', 'admin:metrics')],
+    [Markup.callbackButton('« 返回', 'admin:back')]
   ]))
 }
 
 const displayUserManagement = async (ctx) => {
-  const text = '👥 <b>User management</b>\n\nPick an action:'
+  const text = '👥 <b>用户管理</b>\n\n选择操作：'
   const buttons = Markup.inlineKeyboard([
-    [Markup.callbackButton('🚫 Ban / Unban user', 'admin:user:ban')],
-    [Markup.callbackButton('ℹ️ View user info', 'admin:user:info')],
-    [Markup.callbackButton('« Admin panel', 'admin:back')]
+    [Markup.callbackButton('🚫 封禁/解封用户', 'admin:user:ban')],
+    [Markup.callbackButton('ℹ️ 查看用户信息', 'admin:user:info')],
+    [Markup.callbackButton('« 管理面板', 'admin:back')]
   ])
   await renderMessage(ctx, text, buttons)
 }
 
 const displayFinancialOps = async (ctx) => {
-  const text = '💰 <b>Financial operations</b>\n\nPick an action:'
+  const text = '💰 <b>财务操作</b>\n\n选择操作：'
   const buttons = Markup.inlineKeyboard([
-    [Markup.callbackButton('💸 Refund payment', 'admin:finance:refund')],
-    [Markup.callbackButton('💳 Add / Remove credits', 'admin:finance:credits')],
-    [Markup.callbackButton('📜 Payment history', 'admin:finance:history')],
-    [Markup.callbackButton('« Admin panel', 'admin:back')]
+    [Markup.callbackButton('💸 退款', 'admin:finance:refund')],
+    [Markup.callbackButton('💳 添加/扣除积分', 'admin:finance:credits')],
+    [Markup.callbackButton('📜 支付记录', 'admin:finance:history')],
+    [Markup.callbackButton('« 管理面板', 'admin:back')]
   ])
   await renderMessage(ctx, text, buttons)
 }
 
 const displayTransactionHistory = async (ctx) => {
-  const text = '📊 <b>Transaction history</b>\n\nPick a report:'
+  const text = '📊 <b>交易记录</b>\n\n选择报表：'
   const buttons = Markup.inlineKeyboard([
-    [Markup.callbackButton('⭐️ Incoming (stars)', 'admin:history:stars')],
-    [Markup.callbackButton('📤 Outgoing', 'admin:history:out')],
-    [Markup.callbackButton('« Admin panel', 'admin:back')]
+    [Markup.callbackButton('⭐️ 收入（Stars）', 'admin:history:stars')],
+    [Markup.callbackButton('📤 支出', 'admin:history:out')],
+    [Markup.callbackButton('« 管理面板', 'admin:back')]
   ])
   await renderMessage(ctx, text, buttons)
 }
@@ -204,24 +204,24 @@ const displayTransactionHistory = async (ctx) => {
 // --- Awaiting-input prompts -------------------------------------------------
 
 const promptBanUser = (ctx) => promptInput(ctx, 'ban_user',
-  '🚫 Send the user ID or @username to ban / unban.')
+  '🚫 发送要封禁/解封的用户 ID 或 @用户名。')
 
 const promptSetPremium = (ctx) => promptInput(ctx, 'set_premium',
-  '⭐️ Send <code>user_id amount</code> (negative to remove). E.g. <code>123456 100</code> or <code>@username -50</code>.')
+  '⭐️ 发送 <code>用户ID 数量</code>（负数表示扣除）。例如 <code>123456 100</code> 或 <code>@username -50</code>。')
 
 const promptRefund = (ctx) => promptInput(ctx, 'refund_payment',
-  '💸 Send the Telegram payment charge ID to refund.')
+  '💸 发送要退款的 Telegram 支付 charge ID。')
 
 const promptViewUserInfo = (ctx) => promptInput(ctx, 'view_user_info',
-  'ℹ️ Send the user ID or @username to view info.')
+  'ℹ️ 发送用户 ID 或 @用户名查看信息。')
 
 // --- Reports ----------------------------------------------------------------
 
 const renderTransactionsReport = async (ctx, { kind, transactions, truncated }) => {
-  const direction = kind === 'source' ? 'Stars' : 'Outgoing'
+  const direction = kind === 'source' ? 'Stars' : '支出'
   const csvFilename = kind === 'source' ? 'stars_transactions.csv' : 'outgoing_transactions.csv'
   const userKey = kind === 'source' ? 'source' : 'receiver'
-  const partyLabel = kind === 'source' ? 'From' : 'To'
+  const partyLabel = kind === 'source' ? '来自' : '至'
 
   const csvHeader = (truncated ? `# truncated to first ${transactions.length} transactions\n` : '') +
     `Date,Transaction ID,Amount,USD,${partyLabel} Name,${partyLabel} ID`
@@ -242,7 +242,7 @@ const renderTransactionsReport = async (ctx, { kind, transactions, truncated }) 
     const u = item[userKey]?.user
     const userLink = u
       ? `<a href="tg://user?id=${u.id}">${escape(u.first_name || '')}</a>`
-      : '<i>unknown</i>'
+      : '<i>未知</i>'
     return `${i + 1}. <b>${item.amount} ⭐️</b> ($${(item.amount * 0.013).toFixed(2)})\n` +
            `   🆔 <code>${item.id}</code>\n` +
            `   👤 ${partyLabel}: ${userLink}\n` +
@@ -255,8 +255,8 @@ const renderTransactionsReport = async (ctx, { kind, transactions, truncated }) 
 
   await renderMessage(
     ctx,
-    `<b>📊 Last 20 ${direction} transactions</b>\n\n${list || '<i>No transactions.</i>'}\n\nFull CSV attached.${truncatedNote}`,
-    Markup.inlineKeyboard([[Markup.callbackButton('« Transaction history', 'admin:transactions')]])
+    `<b>📊 最近 20 笔${direction}交易</b>\n\n${list || '<i>暂无交易。</i>'}\n\n完整 CSV 已附加。${truncatedNote}`,
+    Markup.inlineKeyboard([[Markup.callbackButton('« 交易记录', 'admin:transactions')]])
   )
 }
 
@@ -268,7 +268,7 @@ const getStarsTransactions = async (ctx) => {
     await renderTransactionsReport(ctx, { kind: 'source', transactions, truncated })
   } catch (error) {
     console.error('Error fetching stars transactions:', error)
-    await ctx.replyWithHTML('❌ Failed to fetch stars transactions. Try again later.')
+    await ctx.replyWithHTML('❌ 获取 Stars 交易失败，请稍后重试。')
   }
 }
 
@@ -280,7 +280,7 @@ const getOutgoingTransactions = async (ctx) => {
     await renderTransactionsReport(ctx, { kind: 'receiver', transactions, truncated })
   } catch (error) {
     console.error('Error fetching outgoing transactions:', error)
-    await ctx.replyWithHTML('❌ Failed to fetch outgoing transactions. Try again later.')
+    await ctx.replyWithHTML('❌ 获取支出交易失败，请稍后重试。')
   }
 }
 
@@ -305,7 +305,7 @@ const findUser = async (ctx, input) => {
 
 const handleBanUser = async (ctx, input) => {
   const user = await findUser(ctx, input)
-  if (!user) return ctx.replyWithHTML('❌ User not found. Check the ID or username and try again.')
+  if (!user) return ctx.replyWithHTML('❌ 未找到用户，请检查 ID 或用户名后重试。')
 
   const updated = await ctx.db.User.findByIdAndUpdate(
     user._id,
@@ -313,31 +313,31 @@ const handleBanUser = async (ctx, input) => {
     { new: true }
   )
 
-  const status = updated.banned ? '🚫 banned' : '✅ unbanned'
+  const status = updated.banned ? '🚫 已封禁' : '✅ 已解封'
   await ctx.replyWithHTML(
-    `User <code>${escape(updated.telegram_id)}</code> ` +
-    `${updated.username ? `(@${escape(updated.username)})` : ''} is now ${status}.`
+    `用户 <code>${escape(updated.telegram_id)}</code> ` +
+    `${updated.username ? `(@${escape(updated.username)})` : ''} 状态：${status}。`
   )
 }
 
 const handleSetPremium = async (ctx, input) => {
   if (!input || !input.trim()) {
-    return ctx.replyWithHTML('❌ Empty input. Format: <code>user_id amount</code>')
+    return ctx.replyWithHTML('❌ 输入为空。格式：<code>用户ID 数量</code>')
   }
 
   const parts = input.trim().split(/\s+/)
   if (parts.length < 2) {
-    return ctx.replyWithHTML('❌ Invalid format. Use: <code>user_id amount</code>')
+    return ctx.replyWithHTML('❌ 格式错误。用法：<code>用户ID 数量</code>')
   }
 
   const [userId, creditStr] = parts
   const credit = parseInt(creditStr, 10)
   if (Number.isNaN(credit)) {
-    return ctx.replyWithHTML('❌ Invalid credit amount. Send an integer (negative to subtract).')
+    return ctx.replyWithHTML('❌ 积分数量无效，请输入整数（负数表示扣除）。')
   }
 
   const user = await findUser(ctx, userId)
-  if (!user) return ctx.replyWithHTML('❌ User not found. Check the ID or username and try again.')
+  if (!user) return ctx.replyWithHTML('❌ 未找到用户，请检查 ID 或用户名后重试。')
 
   const updated = await ctx.db.User.findByIdAndUpdate(
     user._id,
@@ -347,9 +347,9 @@ const handleSetPremium = async (ctx, input) => {
 
   const sign = credit >= 0 ? '+' : ''
   await ctx.replyWithHTML(
-    `✅ User <code>${escape(updated.telegram_id)}</code> ` +
+    `✅ 用户 <code>${escape(updated.telegram_id)}</code> ` +
     `${updated.username ? `(@${escape(updated.username)}) ` : ''}` +
-    `balance: <b>${updated.balance}</b> credits (${sign}${credit}).`
+    `余额：<b>${updated.balance}</b> 积分（${sign}${credit}）。`
   )
 
   if (credit !== 0) {
@@ -363,7 +363,7 @@ const handleSetPremium = async (ctx, input) => {
 
 const handleRefundPayment = async (ctx, paymentId) => {
   if (!paymentId || !paymentId.trim()) {
-    return ctx.replyWithHTML('❌ Empty payment ID.')
+    return ctx.replyWithHTML('❌ 支付 ID 为空。')
   }
 
   const trimmed = paymentId.trim()
@@ -371,11 +371,11 @@ const handleRefundPayment = async (ctx, paymentId) => {
     'resultData.telegram_payment_charge_id': trimmed
   })
 
-  if (!payment) return ctx.replyWithHTML('❌ Payment not found.')
-  if (payment.status === 'refunded') return ctx.replyWithHTML('❌ Payment already refunded.')
+  if (!payment) return ctx.replyWithHTML('❌ 未找到支付记录。')
+  if (payment.status === 'refunded') return ctx.replyWithHTML('❌ 该支付已退款。')
 
   const refundUser = await ctx.db.User.findOne({ _id: payment.user })
-  if (!refundUser) return ctx.replyWithHTML('❌ User attached to that payment was not found.')
+  if (!refundUser) return ctx.replyWithHTML('❌ 未找到该支付关联的用户。')
 
   try {
     await ctx.telegram.callApi('refundStarPayment', {
@@ -390,52 +390,52 @@ const handleRefundPayment = async (ctx, paymentId) => {
       { new: true }
     )
     if (!refunded) {
-      return ctx.replyWithHTML('❌ Payment was already refunded by another operation.')
+      return ctx.replyWithHTML('❌ 该支付已被其他操作退款。')
     }
 
     await ctx.db.User.findByIdAndUpdate(refundUser._id, { $inc: { balance: -payment.amount } })
 
-    await ctx.replyWithHTML(`✅ Payment <code>${escape(trimmed)}</code> refunded successfully.`)
+    await ctx.replyWithHTML(`✅ 支付 <code>${escape(trimmed)}</code> 退款成功。`)
   } catch (error) {
     console.error('Refund failed:', error)
-    await ctx.replyWithHTML(`❌ Refund failed: <code>${escape(error.description || error.message || 'unknown error')}</code>`)
+    await ctx.replyWithHTML(`❌ 退款失败：<code>${escape(error.description || error.message || '未知错误')}</code>`)
   }
 }
 
 const handleViewUserInfo = async (ctx, input) => {
   const user = await findUser(ctx, input)
-  if (!user) return ctx.replyWithHTML('❌ User not found. Check the ID or username and try again.')
+  if (!user) return ctx.replyWithHTML('❌ 未找到用户，请检查 ID 或用户名后重试。')
 
   const lines = [
-    '👤 <b>User information</b>',
+    '👤 <b>用户信息</b>',
     '',
     `🆔 <code>${escape(user.telegram_id)}</code>`,
     `👤 ${escape(user.first_name || '')}${user.last_name ? ' ' + escape(user.last_name) : ''}`,
-    `🏷 ${user.username ? '@' + escape(user.username) : '<i>no username</i>'}`,
-    `💰 Balance: <b>${user.balance}</b>`,
-    `🌍 Locale: ${user.locale || '<i>unset</i>'}`,
-    `🚫 Banned: ${user.banned ? 'yes' : 'no'}`,
-    `🔒 Blocked: ${user.blocked ? 'yes' : 'no'}`,
-    `👑 Admin rights: ${(user.adminRights && user.adminRights.length) ? user.adminRights.join(', ') : 'none'}`,
-    `🛡 Moderator: ${user.moderator ? 'yes' : 'no'}`,
-    `🚷 Public ban: ${user.publicBan ? 'yes' : 'no'}`,
+    `🏷 ${user.username ? '@' + escape(user.username) : '<i>无用户名</i>'}`,
+    `💰 余额：<b>${user.balance}</b>`,
+    `🌍 语言：${user.locale || '<i>未设置</i>'}`,
+    `🚫 封禁：${user.banned ? '是' : '否'}`,
+    `🔒 拉黑：${user.blocked ? '是' : '否'}`,
+    `👑 管理员权限：${(user.adminRights && user.adminRights.length) ? user.adminRights.join(', ') : '无'}`,
+    `🛡 版主：${user.moderator ? '是' : '否'}`,
+    `🚷 公开封禁：${user.publicBan ? '是' : '否'}`,
     '',
-    `📦 Sticker set: ${user.stickerSet ? `<code>${escape(user.stickerSet)}</code>` : '<i>unset</i>'}`,
-    `🔠 Inline sticker set: ${user.inlineStickerSet ? `<code>${escape(user.inlineStickerSet)}</code>` : '<i>unset</i>'}`,
-    `📊 Inline type: ${user.inlineType || '<i>unset</i>'}`
+    `📦 贴纸包：${user.stickerSet ? `<code>${escape(user.stickerSet)}</code>` : '<i>未设置</i>'}`,
+    `🔠 内联贴纸包：${user.inlineStickerSet ? `<code>${escape(user.inlineStickerSet)}</code>` : '<i>未设置</i>'}`,
+    `📊 内联类型：${user.inlineType || '<i>未设置</i>'}`
   ]
 
   if (user.webapp && (user.webapp.country || user.webapp.platform)) {
-    lines.push('', '🌐 <b>WebApp:</b>')
-    if (user.webapp.country) lines.push(`  Country: ${escape(user.webapp.country)}`)
-    if (user.webapp.platform) lines.push(`  Platform: ${escape(user.webapp.platform)}`)
-    if (user.webapp.os) lines.push(`  OS: ${escape(user.webapp.os)}`)
-    if (user.webapp.browser) lines.push(`  Browser: ${escape(user.webapp.browser)} ${escape(user.webapp.version || '')}`)
+    lines.push('', '🌐 <b>WebApp：</b>')
+    if (user.webapp.country) lines.push(`  国家：${escape(user.webapp.country)}`)
+    if (user.webapp.platform) lines.push(`  平台：${escape(user.webapp.platform)}`)
+    if (user.webapp.os) lines.push(`  系统：${escape(user.webapp.os)}`)
+    if (user.webapp.browser) lines.push(`  浏览器：${escape(user.webapp.browser)} ${escape(user.webapp.version || '')}`)
   }
 
   lines.push('')
-  if (user.createdAt) lines.push(`📅 Joined: ${new Date(user.createdAt).toLocaleString()}`)
-  if (user.updatedAt) lines.push(`🔄 Updated: ${new Date(user.updatedAt).toLocaleString()}`)
+  if (user.createdAt) lines.push(`📅 加入时间：${new Date(user.createdAt).toLocaleString()}`)
+  if (user.updatedAt) lines.push(`🔄 更新时间：${new Date(user.updatedAt).toLocaleString()}`)
 
   await ctx.replyWithHTML(lines.join('\n'), { disable_web_page_preview: true })
 }
@@ -474,7 +474,7 @@ const handleAwaitingInput = async (ctx, next) => {
     await op.handler(ctx, text)
   } catch (err) {
     console.error(`Admin awaiting-input handler "${key}" failed:`, err)
-    await ctx.replyWithHTML('❌ Something went wrong. Check the logs.').catch(() => {})
+    await ctx.replyWithHTML('❌ 出错了，请查看日志。').catch(() => {})
   }
 }
 
@@ -500,21 +500,21 @@ composer.action('admin:menu', requireAnyAdmin, backToPanel)
 composer.action('admin:input:cancel', async (ctx) => {
   ctx.session.awaitingInput = null
   await ctx.answerCbQuery('Cancelled').catch(() => {})
-  await ctx.editMessageText('✖️ Cancelled.', { parse_mode: 'HTML' }).catch(() => {})
+  await ctx.editMessageText('✖️ 已取消。', { parse_mode: 'HTML' }).catch(() => {})
 })
 composer.command('admincancel', (ctx) => {
   if (!ctx.session.awaitingInput) {
-    return ctx.replyWithHTML('Nothing to cancel.')
+    return ctx.replyWithHTML('没有可取消的操作。')
   }
   ctx.session.awaitingInput = null
-  return ctx.replyWithHTML('✖️ Cancelled.')
+  return ctx.replyWithHTML('✖️ 已取消。')
 })
 
 // Direct commands
 composer.command('ban', requireRight('users'), async (ctx) => {
   const userId = ctx.message.text.split(' ').slice(1).join(' ').trim()
   if (!userId) {
-    return ctx.replyWithHTML('Usage: <code>/ban &lt;user_id or @username&gt;</code>')
+    return ctx.replyWithHTML('用法：<code>/ban &lt;用户ID或@用户名&gt;</code>')
   }
   await handleBanUser(ctx, userId)
 })
