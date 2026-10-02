@@ -6,19 +6,19 @@ const adminPackBulkDelete = new Scene('adminPackBulkDelete')
 
 adminPackBulkDelete.enter(async (ctx) => {
   const welcomeText = `
-Bulk Delete Sticker Packs
+批量删除贴纸包
 
-This tool allows you to delete multiple sticker packs and custom emoji sets based on the links provided in your message.
+此工具可根据你消息中的链接批量删除多个贴纸包和自定义表情集。
 
-⚠️ Warning: This action is irreversible. Use with caution.
+⚠️ 警告：此操作不可逆，请谨慎使用。
 
-To proceed, please send me a message containing links to the sticker packs you want to delete.
-The links can be visible or hidden in the message entities.
-Or click "Cancel" to go back.
+请发送包含要删除的贴纸包链接的消息。
+链接可以是可见文本或消息中的隐藏链接。
+或点击"取消"返回。
   `
 
   const replyMarkup = Markup.inlineKeyboard([
-    [Markup.callbackButton('❌ Cancel', 'admin:pack:bulk_delete:cancel')]
+    [Markup.callbackButton('❌ 取消', 'admin:pack:bulk_delete:cancel')]
   ])
 
   await ctx.replyWithHTML(welcomeText, { reply_markup: replyMarkup })
@@ -50,25 +50,25 @@ adminPackBulkDelete.on('message', async (ctx) => {
   })
 
   if (links.size === 0) {
-    return ctx.replyWithHTML('❌ No valid sticker pack links found in your message. Please try again with valid links.')
+    return ctx.replyWithHTML('❌ 消息中未找到有效的贴纸包链接，请重新发送有效链接。')
   }
 
   const stickerSetNames = Array.from(links).map(link => link.split('/').pop())
 
   const confirmText = `
-Found ${stickerSetNames.length} sticker pack(s) in your message:
+在消息中找到 ${stickerSetNames.length} 个贴纸包：
 
 ${stickerSetNames.map(name => `• ${escapeHTML(name)}`).join('\n')}
 
-Are you sure you want to delete all these packs?
+确定要删除所有这些贴纸包吗？
 
-⚠️ This action cannot be undone!
+⚠️ 此操作无法撤销！
   `
 
   const replyMarkup = Markup.inlineKeyboard([
     [
-      Markup.callbackButton('✅ Yes, delete all', 'admin:pack:bulk_delete:confirm'),
-      Markup.callbackButton('❌ No, cancel', 'admin:pack:bulk_delete:cancel')
+      Markup.callbackButton('✅ 确定全部删除', 'admin:pack:bulk_delete:confirm'),
+      Markup.callbackButton('❌ 取消', 'admin:pack:bulk_delete:cancel')
     ]
   ])
 
@@ -81,7 +81,7 @@ adminPackBulkDelete.action('admin:pack:bulk_delete:confirm', async (ctx) => {
   const stickerSetNames = ctx.session.stickerSetsToDelete
 
   if (!stickerSetNames || stickerSetNames.length === 0) {
-    return ctx.answerCbQuery('❌ No sticker sets to delete. Operation cancelled.', true)
+    return ctx.answerCbQuery('❌ 没有可删除的贴纸包，操作已取消。', true)
   }
 
   let deletedCount = 0
@@ -105,11 +105,11 @@ adminPackBulkDelete.action('admin:pack:bulk_delete:confirm', async (ctx) => {
   }
 
   const resultText = `
-Operation completed:
-✅ Successfully deleted: ${deletedCount} pack(s)
-❌ Failed to delete: ${errorCount} pack(s)
+操作完成：
+✅ 成功删除：${deletedCount} 个贴纸包
+❌ 删除失败：${errorCount} 个贴纸包
 
-Total packs processed: ${stickerSetNames.length}
+共处理：${stickerSetNames.length} 个贴纸包
   `
 
   await ctx.answerCbQuery()
@@ -119,13 +119,13 @@ Total packs processed: ${stickerSetNames.length}
 })
 
 adminPackBulkDelete.action('admin:pack:bulk_delete:cancel', async (ctx) => {
-  await ctx.answerCbQuery('Operation cancelled')
+  await ctx.answerCbQuery('操作已取消')
   delete ctx.session.stickerSetsToDelete
   return ctx.scene.leave()
 })
 
 adminPackBulkDelete.on('callback_query', async (ctx) => {
-  await ctx.answerCbQuery('Unknown action')
+  await ctx.answerCbQuery('未知操作')
 })
 
 module.exports = adminPackBulkDelete

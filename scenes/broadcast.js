@@ -17,20 +17,20 @@ const NAME_MAX_LEN = 200
 // Shared helpers
 // ───────────────────────────────────────────────────────────────────────
 const cancelKeyboard = Markup.inlineKeyboard([
-  [Markup.callbackButton('✖️ Cancel', 'broadcast:new:cancel')]
+  [Markup.callbackButton('✖️ 取消', 'broadcast:new:cancel')]
 ])
 
 const audienceKeyboard = () => Markup.inlineKeyboard([
   ...broadcast.audiences.list().map(({ key, label }) => (
     [Markup.callbackButton(label, `broadcast:new:audience:${key}`)]
   )),
-  [Markup.callbackButton('✖️ Cancel', 'broadcast:new:cancel')]
+  [Markup.callbackButton('✖️ 取消', 'broadcast:new:cancel')]
 ])
 
 const confirmKeyboard = Markup.inlineKeyboard([
   [
-    Markup.callbackButton('🚀 Publish', 'broadcast:new:publish'),
-    Markup.callbackButton('✖️ Cancel', 'broadcast:new:cancel')
+    Markup.callbackButton('🚀 发布', 'broadcast:new:publish'),
+    Markup.callbackButton('✖️ 取消', 'broadcast:new:cancel')
   ]
 ])
 
@@ -74,8 +74,8 @@ const broadcastNewName = new Scene('broadcastNewName')
 broadcastNewName.enter(async (ctx) => {
   ctx.session.scene = {}
   await ctx.replyWithHTML(
-    '📣 <b>New broadcast</b>\n\n' +
-    `Enter an internal name for this campaign (≤${NAME_MAX_LEN} chars; users won't see it).`,
+    '📣 <b>新建广播</b>\n\n' +
+    `请输入本次广播的内部名称（≤${NAME_MAX_LEN} 个字符；用户不会看到）。`,
     { reply_markup: cancelKeyboard }
   )
 })
@@ -83,13 +83,13 @@ broadcastNewName.enter(async (ctx) => {
 broadcastNewName.on('text', async (ctx) => {
   const name = (ctx.message.text || '').trim()
   if (!name) {
-    return ctx.replyWithHTML('Please send a text name.', { reply_markup: cancelKeyboard })
+    return ctx.replyWithHTML('请发送一个文本名称。', { reply_markup: cancelKeyboard })
   }
   ctx.session.scene.name = name.slice(0, NAME_MAX_LEN)
   return ctx.scene.enter('broadcastNewMessage')
 })
 
-broadcastNewName.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ Cancelled.'))
+broadcastNewName.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ 已取消。'))
 
 // ───────────────────────────────────────────────────────────────────────
 // Scene: message
@@ -98,9 +98,9 @@ const broadcastNewMessage = new Scene('broadcastNewMessage')
 
 broadcastNewMessage.enter(async (ctx) => {
   await ctx.replyWithHTML(
-    '✅ Name saved.\n\n' +
-    'Now send the post to broadcast — exactly as you want users to receive it.\n' +
-    '<i>Any message type. Inline buttons (URL, copy-text, web app, colored — all of them) are preserved.</i>',
+    '✅ 名称已保存。\n\n' +
+    '现在发送要广播的内容——与用户实际收到的完全一致。\n' +
+    '<i>支持任何消息类型。内联按钮（URL、复制文本、WebApp、彩色——全部保留）。</i>',
     { reply_markup: cancelKeyboard }
   )
 })
@@ -109,7 +109,7 @@ broadcastNewMessage.on('message', async (ctx) => {
   const captured = captureMessage(ctx.message)
   if (!captured) {
     return ctx.replyWithHTML(
-      '❌ Unsupported message type — send a regular text/photo/video/document/etc.',
+      '❌ 不支持的消息类型——请发送常规文本/图片/视频/文件等。',
       { reply_markup: cancelKeyboard }
     )
   }
@@ -117,7 +117,7 @@ broadcastNewMessage.on('message', async (ctx) => {
   return ctx.scene.enter('broadcastNewDate')
 })
 
-broadcastNewMessage.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ Cancelled.'))
+broadcastNewMessage.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ 已取消。'))
 
 // ───────────────────────────────────────────────────────────────────────
 // Scene: date
@@ -126,10 +126,10 @@ const broadcastNewDate = new Scene('broadcastNewDate')
 
 broadcastNewDate.enter(async (ctx) => {
   await ctx.replyWithHTML(
-    '✅ Post captured.\n\n' +
-    'When should it be sent?\n' +
-    '• Send <code>now</code> to dispatch immediately\n' +
-    '• Or a date in <code>DD.MM HH:mm</code> format (server timezone)',
+    '✅ 内容已捕获。\n\n' +
+    '什么时候发送？\n' +
+    '• 发送 <code>now</code> 立即推送\n' +
+    '• 或发送 <code>DD.MM HH:mm</code> 格式的日期（服务器时区）',
     { reply_markup: cancelKeyboard }
   )
 })
@@ -144,7 +144,7 @@ broadcastNewDate.on('text', async (ctx) => {
     const m = moment(text, 'DD.MM HH:mm', true)
     if (!m.isValid()) {
       return ctx.replyWithHTML(
-        '❌ Invalid date — use <code>DD.MM HH:mm</code> or <code>now</code>.',
+        '❌ 日期无效——请使用 <code>DD.MM HH:mm</code> 或 <code>now</code>。',
         { reply_markup: cancelKeyboard }
       )
     }
@@ -157,7 +157,7 @@ broadcastNewDate.on('text', async (ctx) => {
   return ctx.scene.enter('broadcastNewAudience')
 })
 
-broadcastNewDate.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ Cancelled.'))
+broadcastNewDate.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ 已取消。'))
 
 // ───────────────────────────────────────────────────────────────────────
 // Scene: audience
@@ -167,8 +167,8 @@ const broadcastNewAudience = new Scene('broadcastNewAudience')
 broadcastNewAudience.enter(async (ctx) => {
   const { scheduledAt } = ctx.session.scene
   await ctx.replyWithHTML(
-    `📅 Scheduled for: <code>${moment(scheduledAt).format('DD MMM YYYY HH:mm')}</code>\n\n` +
-    'Pick the audience:',
+    `📅 计划发送时间：<code>${moment(scheduledAt).format('DD MMM YYYY HH:mm')}</code>\n\n` +
+    '选择受众：',
     { reply_markup: audienceKeyboard() }
   )
 })
@@ -177,9 +177,9 @@ broadcastNewAudience.action(/^broadcast:new:audience:(.+)$/, async (ctx) => {
   const key = ctx.match[1]
   const audience = broadcast.audiences.get(key)
   if (!audience) {
-    return ctx.answerCbQuery('Unknown audience', true).catch(() => {})
+    return ctx.answerCbQuery('未知受众', true).catch(() => {})
   }
-  await ctx.answerCbQuery('Counting…').catch(() => {})
+  await ctx.answerCbQuery('统计中…').catch(() => {})
 
   // Count is cached for 5 min in broadcast/audiences.js; the first pick may
   // still take several seconds on big collections. If it times out (mongo
@@ -192,8 +192,8 @@ broadcastNewAudience.action(/^broadcast:new:audience:(.+)$/, async (ctx) => {
   } catch (err) {
     log.warn(`audience count failed (${key}): ${err.message}`)
     await ctx.replyWithHTML(
-      '⚠️ Could not count audience right now (DB busy or query timed out).\n' +
-      'You can still publish — actual count is computed at dispatch time.'
+      '⚠️ 当前无法统计受众（数据库繁忙或查询超时）。\n' +
+      '你仍然可以发布——实际数量将在发送时计算。'
     ).catch(() => {})
   }
 
@@ -203,11 +203,11 @@ broadcastNewAudience.action(/^broadcast:new:audience:(.+)$/, async (ctx) => {
   return ctx.scene.enter('broadcastNewConfirm')
 })
 
-broadcastNewAudience.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ Cancelled.'))
+broadcastNewAudience.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ 已取消。'))
 
 // Fallback for stray text while waiting for the audience pick.
 broadcastNewAudience.on('message', async (ctx) => {
-  await ctx.replyWithHTML('Use the buttons above to pick an audience.', {
+  await ctx.replyWithHTML('请使用上方按钮选择受众。', {
     reply_markup: audienceKeyboard()
   })
 })
@@ -227,26 +227,26 @@ broadcastNewConfirm.enter(async (ctx) => {
   } catch (err) {
     log.error('confirm preview failed:', err.message)
     await ctx.replyWithHTML(
-      `⚠️ Preview failed: <code>${escapeHTML(err.message || 'unknown')}</code>\n` +
-      'You can still publish, but verify the captured payload is intact.'
+      `⚠️ 预览失败：<code>${escapeHTML(err.message || '未知')}</code>\n` +
+      '你仍然可以发布，但请确认捕获的内容完整。'
     )
   }
 
   const audienceLine = audienceCount === null || audienceCount === undefined
-    ? `<b>Audience:</b> ${escapeHTML(audienceLabel)} — <i>count unavailable, will be computed at dispatch</i>`
-    : `<b>Audience:</b> ${escapeHTML(audienceLabel)} — <b>${audienceCount.toLocaleString()}</b> users`
+    ? `<b>Audience:</b> ${escapeHTML(audienceLabel)} — <i>数量暂不可用，将在发送时计算</i>`
+    : `<b>Audience:</b> ${escapeHTML(audienceLabel)} — <b>${audienceCount.toLocaleString()}</b> 名用户`
 
   const lines = [
-    '☝️ <i>Preview above — what users will receive.</i>',
+    '☝️ <i>上方为预览——用户将收到的内容。</i>',
     '',
-    '<b>📋 Confirm broadcast</b>',
-    `<b>Name:</b> ${escapeHTML(name)}`,
+    '<b>📋 确认广播</b>',
+    `<b>名称：</b> ${escapeHTML(name)}`,
     audienceLine,
-    `<b>Scheduled:</b> <code>${moment(scheduledAt).format('DD MMM YYYY HH:mm')}</code>`,
+    `<b>计划发送：</b> <code>${moment(scheduledAt).format('DD MMM YYYY HH:mm')}</code>`,
     '',
     audienceCount === 0
-      ? '⚠️ <i>No users match this audience.</i>'
-      : 'Ready to publish?'
+      ? '⚠️ <i>没有用户匹配该受众。</i>'
+      : '准备发布？'
   ]
 
   await ctx.replyWithHTML(lines.join('\n'), { reply_markup: confirmKeyboard })
@@ -255,7 +255,7 @@ broadcastNewConfirm.enter(async (ctx) => {
 broadcastNewConfirm.action('broadcast:new:publish', async (ctx) => {
   const draft = ctx.session.scene
   if (!draft || !draft.name || !draft.message || !draft.scheduledAt || !draft.audience) {
-    await ctx.answerCbQuery('Incomplete draft', true).catch(() => {})
+    await ctx.answerCbQuery('草稿不完整', true).catch(() => {})
     return exitScene(ctx)
   }
   // Take the draft synchronously, before the first await: two quick taps run
@@ -278,24 +278,24 @@ broadcastNewConfirm.action('broadcast:new:publish', async (ctx) => {
     })
 
     await ctx.replyWithHTML(
-      `✅ Broadcast <b>${escapeHTML(draft.name)}</b> queued.\n` +
-      `<i>ID:</i> <code>${doc._id}</code>`,
+      `✅ 广播 <b>${escapeHTML(draft.name)}</b> 已排队。\n` +
+      `<i>ID：</i> <code>${doc._id}</code>`,
       {
         reply_markup: Markup.inlineKeyboard([
-          [Markup.callbackButton('📊 View status', `admin:messaging:status:${doc._id}`)],
-          [Markup.callbackButton('📣 Broadcasts', 'admin:messaging')]
+          [Markup.callbackButton('📊 查看状态', `admin:messaging:status:${doc._id}`)],
+          [Markup.callbackButton('📣 广播', 'admin:messaging')]
         ])
       }
     )
   } catch (err) {
     log.error('failed to persist broadcast:', err.stack || err.message)
-    await ctx.replyWithHTML('❌ Failed to save broadcast. Check the logs.').catch(() => {})
+    await ctx.replyWithHTML('❌ 保存广播失败，请查看日志。').catch(() => {})
   }
 
   return exitScene(ctx)
 })
 
-broadcastNewConfirm.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ Cancelled.'))
+broadcastNewConfirm.action('broadcast:new:cancel', (ctx) => exitScene(ctx, '✖️ 已取消。'))
 
 module.exports = [
   broadcastNewName,

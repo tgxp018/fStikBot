@@ -109,18 +109,18 @@ const activeAudience = (key, label, locale) => ({
 const REACHABLE = { blocked: { $ne: true }, banned: { $ne: true } }
 
 const AUDIENCES = {
-  all: findAudience('all', '🌐 All users (excl. RU)',
+  all: findAudience('all', '🌐 全部用户（不含俄语）',
     () => ({ ...REACHABLE, locale: { $ne: 'ru' } })),
-  ru: findAudience('ru', '🇷🇺 Russian',
+  ru: findAudience('ru', '🇷🇺 俄语用户',
     () => ({ ...REACHABLE, locale: 'ru' })),
-  uk: findAudience('uk', '🇺🇦 Ukrainian',
+  uk: findAudience('uk', '🇺🇦 乌克兰语用户',
     () => ({ ...REACHABLE, locale: 'uk' })),
-  en: findAudience('en', '🇬🇧 English',
+  en: findAudience('en', '🇬🇧 英语用户',
     () => ({ ...REACHABLE, locale: 'en' })),
-  other: findAudience('other', '🌐 Other locales',
+  other: findAudience('other', '🌐 其他语言用户',
     () => ({ ...REACHABLE, locale: { $nin: ['en', 'ru', 'uk'] } })),
-  en_active: activeAudience('en_active', '🇬🇧 Active EN (≥2 packs)', 'en'),
-  other_active: activeAudience('other_active', '🌐 Active other-lang (≥2 packs)', null)
+  en_active: activeAudience('en_active', '🇬🇧 活跃英语（≥2 个贴纸包）', 'en'),
+  other_active: activeAudience('other_active', '🌐 活跃其他语言（≥2 个贴纸包）', null)
 }
 
 const list = () => Object.entries(AUDIENCES).map(([key, { label }]) => ({ key, label }))
