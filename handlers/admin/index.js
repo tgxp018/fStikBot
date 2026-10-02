@@ -155,7 +155,7 @@ const displayMetrics = async (ctx) => {
     .filter(([, from]) => from)
     .map(([label, from, to]) => `${label}: <b>${Math.round((to / from) * 100)}%</b> (${to}/${from})`)
 
-  const rows = Object.keys(total).sort().map((name) => `<code>${name}</code> — ${total[name]} <i>(today ${today[name] || 0})</i>`)
+  const rows = Object.keys(total).sort().map((name) => `<code>${name}</code> — ${total[name]} <i>（今天 ${today[name] || 0}）</i>`)
 
   const text = [
     '📈 <b>产品指标</b> — 最近 7 天',
@@ -250,7 +250,7 @@ const renderTransactionsReport = async (ctx, { kind, transactions, truncated }) 
   }).join('\n\n')
 
   const truncatedNote = truncated
-    ? `\n\n⚠️ <i>List truncated to first ${transactions.length} transactions.</i>`
+    ? `\n\n⚠️ <i>仅显示前 ${transactions.length} 笔交易。</i>`
     : ''
 
   await renderMessage(
@@ -466,7 +466,7 @@ const handleAwaitingInput = async (ctx, next) => {
   // (or had it revoked) between prompt and reply.
   if (!hasRight(ctx, op.right)) {
     ctx.session.awaitingInput = null
-    return sendDeny(ctx, `⛔ This action requires the <b>${op.right}</b> admin right.`)
+    return sendDeny(ctx, `⛔ 该操作需要 <b>${op.right}</b> 管理员权限。`)
   }
 
   ctx.session.awaitingInput = null
@@ -499,7 +499,7 @@ composer.action('admin:menu', requireAnyAdmin, backToPanel)
 // Cancel an awaiting-input prompt.
 composer.action('admin:input:cancel', async (ctx) => {
   ctx.session.awaitingInput = null
-  await ctx.answerCbQuery('Cancelled').catch(() => {})
+  await ctx.answerCbQuery('已取消').catch(() => {})
   await ctx.editMessageText('✖️ 已取消。', { parse_mode: 'HTML' }).catch(() => {})
 })
 composer.command('admincancel', (ctx) => {

@@ -9,11 +9,11 @@ composer.action(/admin:pack:bulk_delete/, (ctx) => ctx.scene.enter('adminPackBul
 
 composer.action(/admin:pack/, async (ctx) => {
   const resultText = `
-<b>Admin Pack Management</b>
+<b>贴纸包管理</b>
 
-Choose an option:
-• Edit or remove individual packs
-• Bulk delete packs by user ID
+选择操作：
+• 编辑或删除单个贴纸包
+• 按用户 ID 批量删除贴纸包
   `
 
   const replyMarkup = Markup.inlineKeyboard([

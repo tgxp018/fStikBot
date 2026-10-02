@@ -38,15 +38,15 @@ const renderStatusText = (b) => {
   const lines = [
     '<b>📊 广播状态</b>',
     '',
-    `<b>Name:</b> ${escapeHTML(b.name)}`,
-    `<b>Status:</b> ${STATUS_BADGES[b.status] || b.status}`,
-    `<b>Audience:</b> ${escapeHTML(b.audience.type)}`,
-    `<b>Scheduled:</b> <code>${moment(b.scheduledAt).format('DD MMM YYYY HH:mm')}</code>`,
-    `<b>Created:</b> <code>${moment(b.createdAt).format('DD MMM YYYY HH:mm')}</code>`,
+    `<b>名称：</b> ${escapeHTML(b.name)}`,
+    `<b>状态：</b> ${STATUS_BADGES[b.status] || b.status}`,
+    `<b>受众：</b> ${escapeHTML(b.audience.type)}`,
+    `<b>计划时间：</b> <code>${moment(b.scheduledAt).format('DD MMM YYYY HH:mm')}</code>`,
+    `<b>创建时间：</b> <code>${moment(b.createdAt).format('DD MMM YYYY HH:mm')}</code>`,
     '',
-    `<b>Progress:</b> ${completionPct}% ${renderProgressBar(sent, total)}`,
-    `<b>Sent:</b> ${sent.toLocaleString()} / ${total.toLocaleString()}`,
-    `<b>Failed:</b> ${failed.toLocaleString()}`
+    `<b>进度：</b> ${completionPct}% ${renderProgressBar(sent, total)}`,
+    `<b>已发送：</b> ${sent.toLocaleString()} / ${total.toLocaleString()}`,
+    `<b>失败：</b> ${failed.toLocaleString()}`
   ]
 
   if (b.errorCounts && typeof b.errorCounts === 'object') {
@@ -162,8 +162,8 @@ composer.action(/^admin:messaging:list:(active|archive):(\d+)$/, async (ctx) => 
 
   const headline = kind === 'archive' ? '📁 <b>归档</b>' : '📋 <b>进行中的广播</b>'
   const body = total === 0
-    ? `${headline}\n\n<i>Nothing here.</i>`
-    : `${headline}\n\nPage ${safePage}/${pages} · ${total} total`
+    ? `${headline}\n\n<i>暂无内容。</i>`
+    : `${headline}\n\n第 ${safePage}/${pages} 页 · 共 ${total} 条`
 
   await tolerantEditMessage(ctx, body, {
     parse_mode: 'HTML',
