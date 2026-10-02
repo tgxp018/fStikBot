@@ -1,38 +1,38 @@
+version: '3.3'
+
 services:
-
   mongo:
-    image: mongo
-    restart: always
-    volumes:
-      - mongo-data:/data/db
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
-
-  redis:
-    image: redis:7-alpine
+    image: mongo:4.2-bionic
     restart: always
     ports:
-      - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+      - "127.0.0.1:27017:27017"
+    command: mongod --bind_ip_all --auth
+    volumes:
+      - mongo_data:/data/db
 
-  fstikbot:
-    build: .
-    depends_on:
-      mongo:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+  redis:
+    image: redis:alpine
     restart: always
-    env_file:
-    - .env
+    ports:
+      - "127.0.0.1:6379:6379"
+
+  bot:
+    build: .
+    restart: always
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - ./config.json:/app/config.json
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - MONGODB_URI=${MONGODB_URI}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MSC_DONATE_METHOD=invoice
+      - PROVIDER_TOKEN=""
+      - NODE_OPTIONS=--dns-result-order=ipv4first
+      - MONGO_POOL_MIN=3
 
 volumes:
-  mongo-data:
+  mongo_data:
