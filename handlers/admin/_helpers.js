@@ -42,7 +42,7 @@ const requireAnyAdmin = (ctx, next) => {
 const requireRight = (right) => async (ctx, next) => {
   if (hasRight(ctx, right)) return next()
   if (isAnyAdmin(ctx)) {
-    return sendDeny(ctx, `⛔ This action requires the <b>${right}</b> admin right.`)
+    return sendDeny(ctx, `⛔ 该操作需要 <b>${right}</b> 管理员权限。`)
   }
 }
 
@@ -50,7 +50,7 @@ const requireRight = (right) => async (ctx, next) => {
 const requireMainAdmin = async (ctx, next) => {
   if (isMainAdmin(ctx)) return next()
   if (isAnyAdmin(ctx)) {
-    return sendDeny(ctx, '⛔ This action is restricted to the main admin.')
+    return sendDeny(ctx, '⛔ 该操作仅限主管理员使用。')
   }
 }
 
