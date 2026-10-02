@@ -1,5 +1,5 @@
 /* ==========================================================================
-   fStikBot · Banner design system
+   Sticemojibot · Banner design system
    Shared base across every banner. Each banner overrides only the palette
    (--sky-0/1/2), pattern density (--pattern-size / --pattern-opacity), and
    its title text. Composition, typography, tile treatment stay consistent
@@ -107,7 +107,7 @@ html, body {
 }
 
 /* ---- Tile (right-side hero element) --------------------------------
-     .tile--mascot   → the fStikBot app icon (welcome only)
+     .tile--mascot   → the Sticemojibot app icon (welcome only)
      .tile--icon     → white app-icon-style tile with a section glyph
    -------------------------------------------------------------------- */
 

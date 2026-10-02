@@ -9,7 +9,7 @@ all encoded here.
 
 ## 1. Concept
 
-**fStikBot promo slides.** Each banner is one issue in a consistent series,
+**Sticemojibot promo slides.** Each banner is one issue in a consistent series,
 the same way Telegram's own promo banners (Premium, Stars, Business) share
 one layout language and change only the colour/icon/title per product.
 
@@ -23,7 +23,7 @@ Three ingredients define every banner:
 
 What makes the series recognisable is the **combination**: cohesive bold
 italic type + doodle texture + tilted app-icon tile. Change any one and it
-stops feeling like fStikBot.
+stops feeling like Sticemojibot.
 
 ---
 
@@ -197,7 +197,7 @@ denser + more visible.
 
 Two variants, same position/size/tilt so the family feels cohesive.
 
-### 7.1 `.tile--mascot` — the fStikBot app icon
+### 7.1 `.tile--mascot` — the Sticemojibot app icon
 
 Used on `welcome` only. The actual bot avatar (yellow star on blue-yellow
 gradient) inside a rounded-square frame at 8° tilt. Treats the real brand

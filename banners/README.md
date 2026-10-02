@@ -14,7 +14,7 @@ banners/
 │   ├── catalog.html        # search_catalog
 │   ├── new-pack.html       # (available, not yet wired)
 │   └── assets/
-│       ├── mascot.jpg      # fStikBot app icon
+│       ├── mascot.jpg      # Sticemojibot app icon
 │       └── pattern.svg     # doodle wallpaper (Tabler Icons, MIT)
 ├── dist/                   # committed PNG output
 │   └── *.png               # 2400×800 (retina), ship these
