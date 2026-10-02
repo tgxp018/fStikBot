@@ -22,7 +22,7 @@ cmd:
       ¡Hola, ${name}!
       Creo stickers y emojis a partir de fotos, videos y GIFs.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       ¡Hola, ${groupTitle}! Creo stickers y emojis.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 ¿El sticker queda muy pequeño?</b>
       Recorta la imagen en cuadrado (1:1) antes de enviarla.
 
-      <b>🔗 ¿Cómo quito "_by_fStikBot" del enlace?</b>
+      <b>🔗 ¿Cómo quito "_by_Sticemojibot" del enlace?</b>
       No se puede. Telegram exige este sufijo para saber qué bot creó el paquete. Es una regla de la plataforma, no nuestra.
 
       <b>💎 ¿Necesito Premium?</b>
@@ -177,7 +177,7 @@ cmd:
       • Usar stickers: gratis
       • Enviar emojis personalizados: solo con Premium (regla de Telegram)
 
-      <b>¿Más preguntas?</b> @fStikCommunity
+      <b>¿Más preguntas?</b> @Sticemojibot
     btn:
       open: '📖 Abrir guía'
       create: '🎨 Crear stickers'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Elige tu idioma
 
-      Ayuda con la traducción: https://crwd.in/fStikBot
+      Ayuda con la traducción: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Restaurar paquete</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Dudas sobre pagos</b>
 
-    Escribe al desarrollador: @ly_oBot
+    Escribe al desarrollador: @Sticemojibot
   mosaic:
     enter: |
       🧩 Mosaico para <b>${packTitle}</b>
@@ -951,12 +951,12 @@ error:
   download: |
     No se pudo descargar el archivo. Inténtalo de nuevo.
   banned: |
-    🚫 Acceso denegado. Dudas → @ly_oBot
+    🚫 Acceso denegado. Dudas → @Sticemojibot
   access_denied: Acceso denegado
   unknown: |
     Algo salió mal. Inténtalo de nuevo.
 
-    ¿Sigue sin funcionar? Escribe a @Ly_oBot
+    ¿Sigue sin funcionar? Escribe a @Sticemojibot
   rate_limit: |
     ⏳ Demasiadas solicitudes. Espera un momento e inténtalo de nuevo.
   rate_limit_seconds: |

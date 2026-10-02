@@ -1,6 +1,6 @@
-# fStikBot
+# Sticemojibot
 
-Telegram sticker bot. Make packs, copy packs, edit stickers, search a public catalog. Runs [@fStikBot](https://t.me/fStikBot).
+Telegram sticker bot. Make packs, copy packs, edit stickers, search a public catalog. Runs [@Sticemojibot](https://t.me/Sticemojibot).
 
 ## What it does
 
@@ -19,8 +19,8 @@ Node.js, [telegraf](https://github.com/telegraf/telegraf) for Bot API, [gram.js]
 ## Run it
 
 ```bash
-git clone https://github.com/LyoSU/fStikBot.git
-cd fStikBot
+git clone https://github.com/tgxp018/Sticemojibot.git
+cd Sticemojibot
 cp .env.example .env
 cp config.example.json config.json
 # fill in BOT_TOKEN and friends
@@ -52,4 +52,4 @@ Webhook mode turns on when `BOT_DOMAIN` is set. Otherwise the bot uses long poll
 
 ## License
 
-[PolyForm Noncommercial 1.0.0](LICENSE). Free for personal, research, educational and nonprofit use. For anything commercial ping [@LyoSU](https://t.me/LyoSU) for a separate license.
+[PolyForm Noncommercial 1.0.0](LICENSE). Free for personal, research, educational and nonprofit use. For anything commercial ping [@Sticemojibot](https://t.me/Sticemojibot) for a separate license.

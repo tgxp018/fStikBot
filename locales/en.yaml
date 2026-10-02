@@ -22,7 +22,7 @@ cmd:
       Hey ${name}!
       I create stickers and emoji from photos, videos, and GIFs.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       Hey ${groupTitle}! I create stickers and emoji.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 Sticker too small?</b>
       Crop the image to a square (1:1) before sending.
 
-      <b>🔗 How do I remove "_by_fStikBot" from the link?</b>
+      <b>🔗 How do I remove "_by_Sticemojibot" from the link?</b>
       You can't. Telegram requires this suffix to identify which bot created the pack. It's a platform rule, not ours.
 
       <b>💎 Do I need Premium?</b>
@@ -177,7 +177,7 @@ cmd:
       • Using stickers: free
       • Sending custom emoji: Premium only (Telegram rule)
 
-      <b>More questions?</b> @fStikCommunity
+      <b>More questions?</b> @Sticemojibot
     btn:
       open: '📖 Open guide'
       create: '🎨 Creating stickers'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Choose your language
 
-      Help translate: https://crwd.in/fStikBot
+      Help translate: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Restore pack</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Payment questions</b>
 
-    Contact the developer: @ly_oBot
+    Contact the developer: @Sticemojibot
   mosaic:
     enter: |
       🧩 Mosaic for <b>${packTitle}</b>
@@ -951,12 +951,12 @@ error:
   download: |
     Couldn't download the file. Try again.
   banned: |
-    🚫 Access denied. Questions → @ly_oBot
+    🚫 Access denied. Questions → @Sticemojibot
   access_denied: Access denied
   unknown: |
     Something went wrong. Try again.
 
-    Still not working? Message @Ly_oBot
+    Still not working? Message @Sticemojibot
   rate_limit: |
     ⏳ Too many requests. Wait a moment and try again.
   rate_limit_seconds: |

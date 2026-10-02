@@ -22,7 +22,7 @@ cmd:
       你好，${name}！
       我可以用照片、视频和 GIF 制作贴纸和表情。
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       你好，${groupTitle}！我可以制作贴纸和表情。
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 贴纸太小？</b>
       发送前先把图片裁剪成正方形（1:1）。
 
-      <b>🔗 如何去掉链接中的“_by_fStikBot”？</b>
+      <b>🔗 如何去掉链接中的“_by_Sticemojibot”？</b>
       无法去掉。Telegram 要求使用此后缀来识别贴纸包由哪个机器人创建。这是平台规则，不是我们定的。
 
       <b>💎 需要 Premium 吗？</b>
@@ -177,7 +177,7 @@ cmd:
       • 使用贴纸：免费
       • 发送自定义表情：仅限 Premium（Telegram 规则）
 
-      <b>还有问题？</b> @fStikCommunity
+      <b>还有问题？</b> @Sticemojibot
     btn:
       open: '📖 打开指南'
       create: '🎨 制作贴纸'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 选择语言
 
-      帮助我们翻译：https://crwd.in/fStikBot
+      帮助我们翻译：https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ 恢复贴纸包</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 付款问题</b>
 
-    请联系开发者：@ly_oBot
+    请联系开发者：@Sticemojibot
   mosaic:
     enter: |
       🧩 为 <b>${packTitle}</b> 制作拼图
@@ -951,12 +951,12 @@ error:
   download: |
     文件下载失败，请重试。
   banned: |
-    🚫 访问被拒绝。如有疑问 → @ly_oBot
+    🚫 访问被拒绝。如有疑问 → @Sticemojibot
   access_denied: 访问被拒绝
   unknown: |
     出了点问题，请重试。
 
-    仍然不行？请联系 @Ly_oBot
+    仍然不行？请联系 @Sticemojibot
   rate_limit: |
     ⏳ 请求过多。请稍等片刻后再试。
   rate_limit_seconds: |

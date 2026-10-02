@@ -22,7 +22,7 @@ cmd:
       Salom, ${name}!
       Rasm, video va GIF-lardan stikerlar hamda emoji yarataman.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       Salom, ${groupTitle}! Men stikerlar va emoji yarataman.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 Stiker juda kichikmi?</b>
       Yuborishdan oldin rasmni kvadrat (1:1) shaklida qirqing.
 
-      <b>🔗 Havoladan "_by_fStikBot" ni qanday olib tashlash mumkin?</b>
+      <b>🔗 Havoladan "_by_Sticemojibot" ni qanday olib tashlash mumkin?</b>
       Iloji yoʻq. Telegram toʻplam qaysi bot tomonidan yaratilganini aniqlash uchun bu qoʻshimchani talab qiladi. Bu bizning emas, platformaning qoidasi.
 
       <b>💎 Premium kerakmi?</b>
@@ -177,7 +177,7 @@ cmd:
       • Stikerlardan foydalanish: bepul
       • Maxsus emoji yuborish: faqat Premium (Telegram qoidasi)
 
-      <b>Yana savollar bormi?</b> @fStikCommunity
+      <b>Yana savollar bormi?</b> @Sticemojibot
     btn:
       open: '📖 Qoʻllanmani ochish'
       create: '🎨 Stikerlar yaratish'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Tilni tanlang
 
-      Tarjimaga yordam bering: https://crwd.in/fStikBot
+      Tarjimaga yordam bering: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Toʻplamni tiklash</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Toʻlov boʻyicha savollar</b>
 
-    Dasturchiga yozing: @ly_oBot
+    Dasturchiga yozing: @Sticemojibot
   mosaic:
     enter: |
       🧩 <b>${packTitle}</b> uchun mozaika
@@ -951,12 +951,12 @@ error:
   download: |
     Faylni yuklab olib boʻlmadi. Qayta urinib koʻring.
   banned: |
-    🚫 Kirish taqiqlangan. Savollar → @ly_oBot
+    🚫 Kirish taqiqlangan. Savollar → @Sticemojibot
   access_denied: Kirish taqiqlangan
   unknown: |
     Nimadir xato ketdi. Qayta urinib koʻring.
 
-    Yordam bermadimi? @Ly_oBot ga yozing
+    Yordam bermadimi? @Sticemojibot ga yozing
   rate_limit: |
     ⏳ Soʻrovlar juda koʻp. Biroz kuting va qayta urinib koʻring.
   rate_limit_seconds: |

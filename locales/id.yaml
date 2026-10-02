@@ -22,7 +22,7 @@ cmd:
       Halo, ${name}!
       Aku membuat stiker dan emoji dari foto, video, dan GIF.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       Halo, ${groupTitle}! Aku membuat stiker dan emoji.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 Stiker terlalu kecil?</b>
       Potong gambar menjadi persegi (1:1) sebelum dikirim.
 
-      <b>🔗 Bagaimana menghapus "_by_fStikBot" dari tautan?</b>
+      <b>🔗 Bagaimana menghapus "_by_Sticemojibot" dari tautan?</b>
       Tidak bisa. Telegram mewajibkan akhiran ini untuk mengetahui bot mana yang membuat paket. Ini aturan platform, bukan aturan kami.
 
       <b>💎 Perlu Premium?</b>
@@ -177,7 +177,7 @@ cmd:
       • Memakai stiker: gratis
       • Mengirim emoji kustom: hanya Premium (aturan Telegram)
 
-      <b>Masih ada pertanyaan?</b> @fStikCommunity
+      <b>Masih ada pertanyaan?</b> @Sticemojibot
     btn:
       open: '📖 Buka panduan'
       create: '🎨 Membuat stiker'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Pilih bahasa
 
-      Bantu terjemahkan: https://crwd.in/fStikBot
+      Bantu terjemahkan: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Pulihkan paket</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Pertanyaan pembayaran</b>
 
-    Hubungi pengembang: @ly_oBot
+    Hubungi pengembang: @Sticemojibot
   mosaic:
     enter: |
       🧩 Mozaik untuk <b>${packTitle}</b>
@@ -951,12 +951,12 @@ error:
   download: |
     Gagal mengunduh file. Coba lagi.
   banned: |
-    🚫 Akses ditolak. Pertanyaan → @ly_oBot
+    🚫 Akses ditolak. Pertanyaan → @Sticemojibot
   access_denied: Akses ditolak
   unknown: |
     Terjadi kesalahan. Coba lagi.
 
-    Masih tidak berhasil? Hubungi @Ly_oBot
+    Masih tidak berhasil? Hubungi @Sticemojibot
   rate_limit: |
     ⏳ Terlalu banyak permintaan. Tunggu sebentar lalu coba lagi.
   rate_limit_seconds: |

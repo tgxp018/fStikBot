@@ -22,7 +22,7 @@ cmd:
       Salam, ${name}!
       Foto, video və GIF-lərdən stikerlər və emoji yaradıram.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       Salam, ${groupTitle}! Mən stikerlər və emoji yaradıram.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 Stiker çox kiçikdir?</b>
       Göndərməzdən əvvəl şəkli kvadrat (1:1) formada kəsin.
 
-      <b>🔗 Linkdən "_by_fStikBot" necə silinir?</b>
+      <b>🔗 Linkdən "_by_Sticemojibot" necə silinir?</b>
       Heç cür. Telegram paketin hansı botla yaradıldığını müəyyən etmək üçün bu sonluğu tələb edir. Bu, bizim deyil, platformanın qaydasıdır.
 
       <b>💎 Premium lazımdır?</b>
@@ -177,7 +177,7 @@ cmd:
       • Stikerlərdən istifadə: pulsuz
       • Fərdi emoji göndərmək: yalnız Premium (Telegram qaydası)
 
-      <b>Başqa sualınız var?</b> @fStikCommunity
+      <b>Başqa sualınız var?</b> @Sticemojibot
     btn:
       open: '📖 Bələdçini aç'
       create: '🎨 Stiker yaratmaq'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Dil seçin
 
-      Tərcüməyə kömək edin: https://crwd.in/fStikBot
+      Tərcüməyə kömək edin: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Paketin bərpası</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Ödənişlə bağlı suallar</b>
 
-    Tərtibatçıya yazın: @ly_oBot
+    Tərtibatçıya yazın: @Sticemojibot
   mosaic:
     enter: |
       🧩 <b>${packTitle}</b> üçün mozaika
@@ -951,12 +951,12 @@ error:
   download: |
     Faylı yükləmək alınmadı. Yenidən cəhd edin.
   banned: |
-    🚫 Giriş qadağandır. Suallar → @ly_oBot
+    🚫 Giriş qadağandır. Suallar → @Sticemojibot
   access_denied: Giriş qadağandır
   unknown: |
     Nəsə səhv getdi. Yenidən cəhd edin.
 
-    Kömək etmir? @Ly_oBot ünvanına yazın
+    Kömək etmir? @Sticemojibot ünvanına yazın
   rate_limit: |
     ⏳ Çox sayda sorğu. Bir az gözləyin və yenidən cəhd edin.
   rate_limit_seconds: |

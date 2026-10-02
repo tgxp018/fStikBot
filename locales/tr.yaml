@@ -22,7 +22,7 @@ cmd:
       Merhaba, ${name}!
       Fotoğraf, video ve GIF'lerden çıkartma ve emoji oluşturuyorum.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       Merhaba, ${groupTitle}! Çıkartma ve emoji oluşturuyorum.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 Çıkartma çok mu küçük?</b>
       Göndermeden önce görseli kare (1:1) olacak şekilde kırp.
 
-      <b>🔗 Bağlantıdaki "_by_fStikBot" nasıl kaldırılır?</b>
+      <b>🔗 Bağlantıdaki "_by_Sticemojibot" nasıl kaldırılır?</b>
       Kaldırılamaz. Telegram, paketi hangi botun oluşturduğunu belirlemek için bu eki zorunlu tutar. Bu bizim değil, platformun kuralı.
 
       <b>💎 Premium gerekli mi?</b>
@@ -177,7 +177,7 @@ cmd:
       • Çıkartma kullanmak: ücretsiz
       • Özel emoji göndermek: yalnızca Premium (Telegram kuralı)
 
-      <b>Başka sorun mu var?</b> @fStikCommunity
+      <b>Başka sorun mu var?</b> @Sticemojibot
     btn:
       open: '📖 Rehberi aç'
       create: '🎨 Çıkartma oluştur'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Dil seç
 
-      Çeviriye yardım et: https://crwd.in/fStikBot
+      Çeviriye yardım et: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Paketi geri yükle</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Ödeme soruları</b>
 
-    Geliştiriciye yaz: @ly_oBot
+    Geliştiriciye yaz: @Sticemojibot
   mosaic:
     enter: |
       🧩 <b>${packTitle}</b> için mozaik
@@ -951,12 +951,12 @@ error:
   download: |
     Dosya indirilemedi. Tekrar dene.
   banned: |
-    🚫 Erişim engellendi. Sorular için → @ly_oBot
+    🚫 Erişim engellendi. Sorular için → @Sticemojibot
   access_denied: Erişim engellendi
   unknown: |
     Bir şeyler ters gitti. Tekrar dene.
 
-    Hâlâ olmuyor mu? @Ly_oBot'a yaz
+    Hâlâ olmuyor mu? @Sticemojibot'a yaz
   rate_limit: |
     ⏳ Çok fazla istek. Biraz bekleyip tekrar dene.
   rate_limit_seconds: |

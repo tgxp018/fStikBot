@@ -22,7 +22,7 @@ cmd:
       Hallo, ${name}!
       Ich erstelle Sticker und Emojis aus Fotos, Videos und GIFs.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       Hallo, ${groupTitle}! Ich erstelle Sticker und Emojis.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 Sticker zu klein?</b>
       Schneide das Bild vor dem Senden quadratisch (1:1) zu.
 
-      <b>🔗 Wie entferne ich "_by_fStikBot" aus dem Link?</b>
+      <b>🔗 Wie entferne ich "_by_Sticemojibot" aus dem Link?</b>
       Gar nicht. Telegram verlangt dieses Suffix, um zu erkennen, welcher Bot das Set erstellt hat. Das ist eine Regel der Plattform, nicht unsere.
 
       <b>💎 Brauche ich Premium?</b>
@@ -177,7 +177,7 @@ cmd:
       • Sticker verwenden: kostenlos
       • Benutzerdefinierte Emojis senden: nur mit Premium (Telegram-Regel)
 
-      <b>Noch Fragen?</b> @fStikCommunity
+      <b>Noch Fragen?</b> @Sticemojibot
     btn:
       open: '📖 Anleitung öffnen'
       create: '🎨 Sticker erstellen'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Wähle eine Sprache
 
-      Hilf beim Übersetzen: https://crwd.in/fStikBot
+      Hilf beim Übersetzen: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Set wiederherstellen</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Fragen zur Zahlung</b>
 
-    Schreib dem Entwickler: @ly_oBot
+    Schreib dem Entwickler: @Sticemojibot
   mosaic:
     enter: |
       🧩 Mosaik für <b>${packTitle}</b>
@@ -951,12 +951,12 @@ error:
   download: |
     Die Datei konnte nicht heruntergeladen werden. Versuche es erneut.
   banned: |
-    🚫 Zugriff verweigert. Fragen → @ly_oBot
+    🚫 Zugriff verweigert. Fragen → @Sticemojibot
   access_denied: Zugriff verweigert
   unknown: |
     Etwas ist schiefgelaufen. Versuche es erneut.
 
-    Hilft das nicht? Schreib an @Ly_oBot
+    Hilft das nicht? Schreib an @Sticemojibot
   rate_limit: |
     ⏳ Zu viele Anfragen. Warte kurz und versuche es erneut.
   rate_limit_seconds: |

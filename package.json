@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LyoSU/fStikBot.git"
+    "url": "git+https://github.com/tgxp018/Sticemojibot.git"
   },
-  "author": "LyoSU",
+  "author": "tgxp018",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/LyoSU/fStikBot/issues"
+    "url": "https://github.com/tgxp018/Sticemojibot/issues"
   },
-  "homepage": "https://github.com/LyoSU/fStikBot#readme",
+  "homepage": "https://github.com/tgxp018/Sticemojibot#readme",
   "dependencies": {
     "@pm2/io": "^6.1.0",
     "bull": "^4.7.0",

@@ -22,7 +22,7 @@ cmd:
       こんにちは、${name}さん！
       写真・動画・GIF からスタンプと絵文字を作成します。
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       こんにちは、${groupTitle}の皆さん！スタンプと絵文字を作成するボットです。
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 スタンプが小さすぎる？</b>
       送信する前に画像を正方形（1:1）にトリミングしてください。
 
-      <b>🔗 リンクから「_by_fStikBot」を消すには？</b>
+      <b>🔗 リンクから「_by_Sticemojibot」を消すには？</b>
       消すことはできません。どのボットで作成されたパックかを識別するため、Telegram がこのサフィックスを必須にしています。当ボットではなくプラットフォームのルールです。
 
       <b>💎 Premium は必要？</b>
@@ -177,7 +177,7 @@ cmd:
       • スタンプの使用：無料
       • カスタム絵文字の送信：Premium のみ（Telegram のルール）
 
-      <b>ほかにご質問は？</b> @fStikCommunity
+      <b>ほかにご質問は？</b> @Sticemojibot
     btn:
       open: '📖 ガイドを開く'
       create: '🎨 スタンプの作成'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 言語を選択してください
 
-      翻訳にご協力ください：https://crwd.in/fStikBot
+      翻訳にご協力ください：https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ パックの復元</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 お支払いに関するお問い合わせ</b>
 
-    開発者までご連絡ください：@ly_oBot
+    開発者までご連絡ください：@Sticemojibot
   mosaic:
     enter: |
       🧩 <b>${packTitle}</b> のモザイク
@@ -951,12 +951,12 @@ error:
   download: |
     ファイルをダウンロードできませんでした。もう一度お試しください。
   banned: |
-    🚫 アクセスが禁止されています。お問い合わせ → @ly_oBot
+    🚫 アクセスが禁止されています。お問い合わせ → @Sticemojibot
   access_denied: アクセスが拒否されました
   unknown: |
     問題が発生しました。もう一度お試しください。
 
-    解決しない場合は @Ly_oBot までご連絡ください
+    解決しない場合は @Sticemojibot までご連絡ください
   rate_limit: |
     ⏳ リクエストが多すぎます。少し待ってから、もう一度お試しください。
   rate_limit_seconds: |

@@ -22,7 +22,7 @@ cmd:
       Olá, ${name}!
       Eu crio figurinhas e emojis a partir de fotos, vídeos e GIFs.
 
-      💬 @fStikCommunity
+      💬 @Sticemojibot
     group: |
       Olá, ${groupTitle}! Eu crio figurinhas e emojis.
 
@@ -169,7 +169,7 @@ cmd:
       <b>🤏 A figurinha ficou pequena demais?</b>
       Corte a imagem em formato quadrado (1:1) antes de enviar.
 
-      <b>🔗 Como tirar o "_by_fStikBot" do link?</b>
+      <b>🔗 Como tirar o "_by_Sticemojibot" do link?</b>
       Não tem como. O Telegram exige esse sufixo para identificar qual bot criou o pacote. É uma regra da plataforma, não nossa.
 
       <b>💎 Preciso do Premium?</b>
@@ -177,7 +177,7 @@ cmd:
       • Usar figurinhas: grátis
       • Enviar emojis personalizados: só com Premium (regra do Telegram)
 
-      <b>Mais dúvidas?</b> @fStikCommunity
+      <b>Mais dúvidas?</b> @Sticemojibot
     btn:
       open: '📖 Abrir guia'
       create: '🎨 Criar figurinhas'
@@ -192,7 +192,7 @@ cmd:
     choose: |
       🌐 Escolha o idioma
 
-      Ajude com a tradução: https://crwd.in/fStikBot
+      Ajude com a tradução: https://crwd.in/Sticemojibot
   restore: |
     <b>♻️ Restaurar pacote</b>
 
@@ -245,7 +245,7 @@ cmd:
   paysupport: |
     <b>💳 Dúvidas sobre pagamento</b>
 
-    Fale com o desenvolvedor: @ly_oBot
+    Fale com o desenvolvedor: @Sticemojibot
   mosaic:
     enter: |
       🧩 Mosaico para <b>${packTitle}</b>
@@ -951,12 +951,12 @@ error:
   download: |
     Não foi possível baixar o arquivo. Tente de novo.
   banned: |
-    🚫 Acesso negado. Dúvidas → @ly_oBot
+    🚫 Acesso negado. Dúvidas → @Sticemojibot
   access_denied: Acesso negado
   unknown: |
     Algo deu errado. Tente de novo.
 
-    Não resolveu? Fale com @Ly_oBot
+    Não resolveu? Fale com @Sticemojibot
   rate_limit: |
     ⏳ Muitas solicitações. Aguarde um pouco e tente de novo.
   rate_limit_seconds: |
