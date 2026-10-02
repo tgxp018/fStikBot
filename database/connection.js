@@ -25,8 +25,8 @@ const connection = mongoose.createConnection(mainUri, {
   autoIndex: false,
   maxPoolSize: parseInt(process.env.MONGO_POOL_SIZE, 10) || 50,
   minPoolSize: parseInt(process.env.MONGO_POOL_MIN, 10) || 10,
-  serverSelectionTimeoutMS: 5000,
-  socketTimeoutMS: 30000,
+  serverSelectionTimeoutMS: 15000,
+  socketTimeoutMS: 60000,
   retryWrites: true,
   retryReads: true
 })

@@ -33,7 +33,7 @@ const requireMongoUri = () => {
 // Wait for a Mongoose connection's first `open` event with a timeout.
 // Without this, a misconfigured MONGODB_URI leaves the bot hanging
 // indefinitely with no progress past "Connecting…".
-const waitForMongo = (connection, timeoutMs = 30_000) => new Promise((resolve) => {
+const waitForMongo = (connection, timeoutMs = 60_000) => new Promise((resolve) => {
   if (connection.readyState === 1) {
     return resolve({ ok: true, name: 'mongo' })
   }
