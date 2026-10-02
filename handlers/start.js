@@ -50,7 +50,6 @@ module.exports = async (ctx) => {
       Markup.callbackButton(ctx.i18n.t('cmd.start.commands.info'), 'pack_about')
     ],
     [
-      Markup.urlButton(ctx.i18n.t('cmd.start.commands.guide'), 'https://fstik.app/guides'),
       Markup.urlButton(ctx.i18n.t('cmd.start.commands.add_to_group'), `https://t.me/${ctx.botInfo.username}?startgroup=bot`)
     ]
   ]

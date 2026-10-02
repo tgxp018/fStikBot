@@ -8,7 +8,7 @@ module.exports = async (ctx) => {
     reply_markup: {
       inline_keyboard: [
         [{ text: ctx.i18n.t('cmd.start.btn.catalog'), url: ctx.config.catalogUrl }],
-        [{ text: ctx.i18n.t('cmd.start.btn.catalog_app'), url: ctx.config.catalogAppUrl }],
+        ...(ctx.config.catalogAppUrl ? [{ text: ctx.i18n.t('cmd.start.btn.catalog_app'), url: ctx.config.catalogAppUrl }] : []),
         [{ text: ctx.i18n.t('cmd.start.commands.publish'), callback_data: 'publish' }]
       ]
     }

@@ -5,8 +5,8 @@
   "emojiLinkPrefix": "t.me/addemoji/",
   "charTitleMax": 35,
   "premiumCharTitleMax": 64,
-  "catalogUrl": "https://t.me/fStikBot/catalog",
-  "catalogAppUrl": "https://play.google.com/store/search?q=fStik&c=apps",
+  "catalogUrl": "https://t.me/Sticemojibot/catalog",
+  "catalogAppUrl": "",
   "ruNewsChannel": {
     "id": -1001653692678,
     "link": "https://t.me/+mEtcpmaPWXcxNjFi"
